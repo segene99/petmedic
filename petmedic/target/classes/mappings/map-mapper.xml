@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapDAO">
+
+		<!-- 지도검색 -->
+	<select id="getMapData" resultType="mapsearch">
+		SELECT * FROM hospital 
+		WHERE hos_role = 'Y'
+		AND hos_del = 'N'
+		OR (#{searchKeyword} = '' OR #{searchKeyword} = null)
+		OR HOS_NAME LIKE CONCAT('%', #{searchKeyword}, '%')
+		OR
+    	(OR HOS_ADDR2 LIKE CONCAT('%', #{searchKeyword}, '%')
+    	OR HOS_ADDR3 LIKE CONCAT('%', #{searchKeyword}, '%')
+    	OR HOS_ADDR LIKE CONCAT('%', #{searchKeyword}, '%'))
+		<if test="hos_cate != '' and hos_cate != null ">AND HOS_CATE LIKE CONCAT('%', #{searchKeyword}, '%')</if>
+		<if test="searchCondition == 'review'"></if>
+		<if test="searchCondition == 'star'"> ORDER BY HOS_STAR DESC</if>
+		<if test="searchCondition == 'price'">ORDER BY HOS_PRICE DESC</if>
+<!-- 		<if test="searchCondition == 'pop'"></if> -->
+<!-- 		<if test="mapTimeOption != '' and mapTimeOption != null">AND #{hos_time} BETWEEN HOS_START AND HOS_END </if> -->
+		
+<!-- 		<if test="searchCondition == 'DOCTOR' ">AND HOS_CATE LIKE CONCAT('%', #{searchKeyword}, '%')</if> -->
+	</select>
+
+	
+</mapper>
