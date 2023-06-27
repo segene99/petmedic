@@ -8,17 +8,17 @@
 1. 일반유저와 병원회원 리뷰검색, 리뷰목록, 리뷰상세보기, 리뷰작성/수정/삭제 프론트 및 백엔드 구현
    - ajax를 활용한 비동기 처리, 마리아DB와 연결 하여 데이터 검색/수정/삭제, controller,service, serviceImpl, Mapper MVC구성
      - 일반회원
-     ![리뷰총합 (1)](https://github.com/segene99/petmedic/assets/112309011/2d51007b-fdc3-4e58-9d28-35015c8e0b97)
+     - ![리뷰총합 (1)](https://github.com/segene99/petmedic/assets/112309011/2d51007b-fdc3-4e58-9d28-35015c8e0b97)
      - 병원회원: 병원에서 관리하는 계정. 여행사이트의 호스트계정과 동일. 부적절한 리뷰신고 가능.
-      ![병원리뷰신고 (1)](https://github.com/segene99/petmedic/assets/112309011/33404027-d34d-4f3f-8596-bd32052e628f)
+     - ![병원리뷰신고 (1)](https://github.com/segene99/petmedic/assets/112309011/33404027-d34d-4f3f-8596-bd32052e628f)
 
 2. 메인페이지 프론트 유튜브 영상 슬라이더 구현
    - swiper 외부라이브러리와 유튜브 embedded 코드 활용
-     ![유튜브 (1)](https://github.com/segene99/petmedic/assets/112309011/b83f7bad-15ea-4abe-a0ef-680114d7171d)
+   - ![유튜브 (1)](https://github.com/segene99/petmedic/assets/112309011/b83f7bad-15ea-4abe-a0ef-680114d7171d)
 
 3. 카카오 맵 API를 활용한 동물병원 지도검색 프론트 및 백엔드 구현
    -  ajax를 활용한 비동기 처리, 마리아DB와 연결 하여 키워드 데이터 검색
-     ![병원검색 (1)](https://github.com/segene99/petmedic/assets/112309011/b7746cfa-b315-463c-bb84-64b2d44696db)
+   -  ![병원검색 (1)](https://github.com/segene99/petmedic/assets/112309011/b7746cfa-b315-463c-bb84-64b2d44696db)
 
 4. AWS EC2를 활용한 웹사이트 도메인 배포
    http://www.petmedic.kro.kr
