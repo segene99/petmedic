@@ -174,18 +174,14 @@
 		SELECT review.*, reserve.*, hospital.hos_name
 		from review, reserve, hospital
 		where RESERVE.res_hos_id = #{rev_hos_id}
-		and review.rev_hos_id =
-		#{rev_hos_id}
+		and review.rev_hos_id = #{rev_hos_id}
 		and REVIEW.rev_res_date = RESERVE.res_date
 		and REVIEW.rev_res_time = RESERVE.res_time
 		and HOSPITAL.HOS_ID = RESERVE.RES_HOS_ID
-		AND RESERVE.RES_CANCEL = 'N'
-		and (REVIEW.REV_REQ = 'B'
-		or REVIEW.REV_REQ = 'C')
-		<if test="searchCondition == 'rev_name' ">AND REVIEW.REV_TITLE LIKE CONCAT('%', #{searchKeyword},
-			'%')</if>
-		<if test="searchCondition == 'rev_star' ">AND REVIEW.REV_STAR LIKE CONCAT('%', #{searchKeyword},
-			'%')</if>
+		and RESERVE.RES_CANCEL = 'N'
+		and (REVIEW.REV_REQ = 'B' or REVIEW.REV_REQ = 'C')
+		<if test="searchCondition == 'rev_name' ">AND REVIEW.REV_TITLE LIKE CONCAT('%',#{searchKeyword},'%')</if>
+		<if test="searchCondition == 'rev_star' ">AND REVIEW.REV_STAR LIKE CONCAT('%',#{searchKeyword},'%')</if>
 		ORDER BY REV_HOS_SEQ DESC;
 	</select>
 

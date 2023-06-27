@@ -67,7 +67,7 @@ function getHosListCate(val){
 					</div>
 				</li>			
 			
-				<li><a href="searchHospitalList" class="nav-link petmedicnav-link"> <b id="navb">병원검색</b></a></li>
+				<li><a href="searchHospitalList" class="nav-link petmedicnav-link"> <b id="navb">지도검색</b></a></li>
 		
 				<li><a href="toGetNoticeList" class="nav-link petmedicnav-link"> <b id="navb">공지사항</b></a></li>
 		

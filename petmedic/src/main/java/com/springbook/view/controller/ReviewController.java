@@ -237,7 +237,7 @@ public class ReviewController {
 	@RequestMapping("/searchHosRevList")
 	public String searchHosRevList(ReviewVO vo, Model model, HttpSession session) {
 		System.out.println("병원리뷰목록 검색 처리");
-		vo.setRev_hos_id((String)session.getAttribute("users_id"));
+		vo.setRev_hos_id((String)session.getAttribute("hos_id"));
 		System.out.println(vo.getRev_hos_id());
 		System.out.println(vo.getSearchKeyword());
 		System.out.println(vo.getSearchCondition());
@@ -307,7 +307,7 @@ public class ReviewController {
 	public String reportReviewHos(ReviewVO vo, Model model, HttpSession session) {
 		String hosUser = (String)session.getAttribute("hos_id");
 		model.addAttribute("review", reviewService.reportReviewHos(vo));
-		return "redirect:getHos?hos_id="+hosUser;
+		return "redirect:toHosReview?hos_id="+hosUser;
 	}
 	
 //	[관리자] 리뷰신고글 상세 조회

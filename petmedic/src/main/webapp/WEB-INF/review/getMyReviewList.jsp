@@ -240,7 +240,7 @@ function getMyActionZzim(val) {
 									<div class="col-4">
 										<img
 											src="${pageContext.request.contextPath}/img/${review.rev_pic}"
-											alt="mdo" class=" profilepic"
+											alt="mdo" class="profilepic"
 											onerror="this.src='${pageContext.request.contextPath}/img/catdefault.png'" />
 									</div>
 								</div>
