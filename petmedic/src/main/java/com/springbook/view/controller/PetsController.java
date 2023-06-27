@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
@@ -34,10 +35,12 @@ public class PetsController {
 	// 펫 등록
 	@RequestMapping("/insertPets")
 	public String insertPets(@ModelAttribute("pets") PetsVO vo, Model model, HttpSession session,
-			@RequestParam("uploadFile") MultipartFile uploadFile) throws IllegalStateException, IOException {
+			@RequestParam("uploadFile") MultipartFile uploadFile, HttpServletRequest request)
+			throws IllegalStateException, IOException {
 		String id = (String) session.getAttribute("users_id");
 		vo.setPet_users_id(id);
-		String realPath = "c:/swork/petmedic/src/main/webapp/resources/imgs/";
+
+		String realPath = request.getSession().getServletContext().getRealPath("/resources/imgs/");
 		String fileName = uploadFile.getOriginalFilename();
 		System.out.println("펫 등록 파일명: " + fileName);
 
@@ -67,61 +70,59 @@ public class PetsController {
 		return timestamp + "." + extension;
 	}
 
-
 	// 펫 수정 (파일 업데이트 포함)
-		@RequestMapping("/updatePetsInfo")
-		public String updatePetsInfo(@ModelAttribute("pets") PetsVO vo, Model model, HttpSession session,
-				@RequestParam("uploadFile") MultipartFile uploadFile) {
-			vo.setPet_pic((String) session.getAttribute("pet_pic"));
-			String id = (String) session.getAttribute("users_id");
-			vo.setPet_users_id(id);
+	@RequestMapping("/updatePetsInfo")
+	public String updatePetsInfo(@ModelAttribute("pets") PetsVO vo, Model model, HttpSession session,
+			@RequestParam("uploadFile") MultipartFile uploadFile, HttpServletRequest request)
+			throws IllegalStateException, IOException {
+		vo.setPet_pic((String) session.getAttribute("pet_pic"));
+		String id = (String) session.getAttribute("users_id");
+		vo.setPet_users_id(id);
 
-			String fileName = uploadFile.getOriginalFilename();
-			String delFile = vo.getPet_pic();
-			System.out.println("지울 파일명: " + delFile);
-			System.out.println("새로 업로드할 파일명: " + fileName);
+		String fileName = uploadFile.getOriginalFilename();
+		String delFile = vo.getPet_pic();
+		System.out.println("지울 파일명: " + delFile);
+		System.out.println("새로 업로드할 파일명: " + fileName);
 
-			if (!uploadFile.isEmpty()) {
-				String filenm = vo.getPet_pic(); // 이전에 있던 파일 이름
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-				Date time = new Date();
-				String result = dateFormat.format(time); // 날짜 붙이기
-				filenm = result + fileName;
-				vo.setPet_pic(filenm);
+		if (!uploadFile.isEmpty()) {
+			String filenm = vo.getPet_pic(); // 이전에 있던 파일 이름
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+			Date time = new Date();
+			String result = dateFormat.format(time); // 날짜 붙이기
+			filenm = result + fileName;
+			vo.setPet_pic(filenm);
 
-				System.out.println("filenm: " + filenm);
+			System.out.println("filenm: " + filenm);
 
-				if (filenm != null) {
-					String realPath = "c:/swork/petmedic/src/main/webapp/resources/imgs/";
-					File file = new File(realPath + filenm);
-					boolean exists = file.exists();
-					while (exists) {
-						File filet = new File(realPath + filenm);
-						exists = filet.exists();
-					}
+			if (filenm != null) {
+				String realPath = request.getSession().getServletContext().getRealPath("/resources/imgs/");
+				File file = new File(realPath + filenm);
+				boolean exists = file.exists();
+				while (exists) {
+					File filet = new File(realPath + filenm);
+					exists = filet.exists();
+				}
 
-					Path delFilePath = Paths.get(realPath + delFile);
-					try {
-						Files.deleteIfExists(delFilePath);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+				Path delFilePath = Paths.get(realPath + delFile);
+				try {
+					Files.deleteIfExists(delFilePath);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 
-					try {
-						uploadFile.transferTo(file);
-					} catch (IllegalStateException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+				try {
+					uploadFile.transferTo(file);
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 			}
-
-			petsService.updatePetsInfo(vo);
-			return "redirect:/mypetlist?pet_users_id=" + id;
 		}
 
-
+		petsService.updatePetsInfo(vo);
+		return "redirect:/mypetlist?pet_users_id=" + id;
+	}
 
 	// 펫 조회
 	@RequestMapping("/mypetInfo")
@@ -172,15 +173,14 @@ public class PetsController {
 
 	// 펫 삭제(파일 삭제 o)
 	@RequestMapping(value = "/deletePetsInfo")
-	public String deletePetsInfo(PetsVO vo, Model model) {
-
+	public String deletePetsInfo(PetsVO vo, Model model, HttpServletRequest request) {
 		System.out.println("delete vo:" + vo);
 		int r = petsService.deletePetsInfo(vo);
 		String filenm = vo.getPet_pic();
 		System.out.println("filenm" + filenm);
-		Path filePath = Paths.get("c:/swork/petmedic/src/main/webapp/resources/imgs/" + filenm);
+		String realPath = request.getSession().getServletContext().getRealPath("/resources/imgs/");
+		Path filePath = Paths.get(realPath, filenm);
 		if (r > 0) { // delete,update,insert는 행수를 반환하기 때문에 int로 받아 조건을 넣는다.
-
 			// 파일 삭제
 			try {
 				Files.delete(filePath);
@@ -188,9 +188,9 @@ public class PetsController {
 				e.printStackTrace();
 			}
 			return "redirect:/mypetlist?pet_users_id=" + vo.getPet_users_id();
-		} else
+		} else {
 			return "mypetlist?error=1";
-
+		}
 	}
 
 	// 펫 등록 페이지

@@ -123,3 +123,22 @@ border: 1px solid lightgray;
     margin: 11px -10px 15px -41px;
 }
 
+  /* Styles for the go-to-top button */
+  .go-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    width: 40px;
+    height: 40px;
+    background-color: #006940ff;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+  }
+  
+   .hidden-item {
+    display: none;
+  }
+

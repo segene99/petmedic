@@ -10,6 +10,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
 <title>병원목록</title>
 <script>
 
@@ -39,17 +40,6 @@ function getMyActionZzim(val) {
             reviewElements[i].textContent = reviewText.substring(0, 100) + "...";
           }
         }
-      });
-//       리뷰목록 더보기
-      document.addEventListener("DOMContentLoaded", function () {
-        var reviewContainer = document.getElementById("reviewContainer");
-        var showMoreButton = document.getElementById("showMoreButton");
-
-        showMoreButton.addEventListener("click", function () {
-          console.log("더보기 실행");
-          reviewContainer.classList.remove("d-none"); // Remove the "d-none" class to show the review container
-          showMoreButton.classList.add("d-none"); // Add the "d-none" class to hide the "Show More" button
-        });
       });
 
 //       블러처리 해제
@@ -82,6 +72,53 @@ function getMyActionZzim(val) {
       }
   
     </script>
+    <script>
+    //더보기 
+  $(document).ready(function() {
+    var visibleItems = 10;
+    
+    // Show/hide items based on the visibility count
+    function toggleItemsVisibility() {
+      $('.hidden-item').slice(0, visibleItems).removeClass('hidden-item');
+      $('.hidden-item').slice(visibleItems).addClass('hidden-item');
+      
+      if ($('.hidden-item').length === 0) {
+        $('#view-more-btn').hide();
+      } else {
+        $('#view-more-btn').show();
+      }
+    }
+    
+    // Initial toggle
+    toggleItemsVisibility();
+    
+    // "View More" button click event
+    $('#view-more-btn').click(function() {
+      visibleItems += 10; // Increase the number of visible items
+      toggleItemsVisibility();
+    });
+  });
+    
+  // 맨위로
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Function to show/hide the go-to-top button based on scroll position
+  function handleScroll() {
+    var scrollToTopBtn = document.getElementById('go-to-top-btn');
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      scrollToTopBtn.style.display = 'block';
+    } else {
+      scrollToTopBtn.style.display = 'none';
+    }
+  }
+
+  // Attach the scroll event listener to the window
+  window.addEventListener('scroll', handleScroll);
+    
+    
+</script>
 <body>
 
 	<div class="container structure">
@@ -105,7 +142,7 @@ function getMyActionZzim(val) {
 				</div>
 				<button type="button" onclick="listbtnhos()" class="search-button">
 						전체목록
-					</button>
+					</button>	
 			</div>
 		
 		
@@ -118,9 +155,9 @@ function getMyActionZzim(val) {
             </div>
         </c:when>
         <c:otherwise>
-			<c:forEach items="${hospital}" var="hospital">
-				<div class="col-md-6 mt-sm-4"
-					onclick="hosDetail('${hospital.hos_id}')">
+			<c:forEach items="${hospital}" var="hospital" varStatus="loop">
+  				<div class="col-md-6 mt-sm-4 ${loop.index > 9 ? 'hidden-item' : ''}" 
+  				onclick="hosDetail('${hospital.hos_id}')">
 						
 					<div class="revShadow review-box">
 						<div class="user-info-hos-list">
@@ -175,8 +212,16 @@ function getMyActionZzim(val) {
 						        	}
 						          }
 				 </script>
+				 
+				 
 		</div>
-		<button id="showMoreButton" class="revInsBtn">더보기</button>
+		<div class="text-center">
+		<hr>
+		<button class="search-button" style="width: 100%;" id="view-more-btn">더보기</button>
+		</div>
+		 <div id="go-to-top-btn" class="go-to-top" onclick="scrollToTop()">
+		      <i class="fa fa-arrow-up"></i>
+		    </div>
 	</div>
 	<%@ include file="../../footer.jsp"%>	
 </body>
