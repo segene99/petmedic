@@ -1,19 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="../../header.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+	<%@ page import="com.spring.pet.hospital.HospitalVO" %>
+	<%@ include file="../../header.jsp"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	<%@ page import="java.text.SimpleDateFormat" %>
+	<%@ page import="java.util.Date" %>
+<%
+	HospitalVO hospital = (HospitalVO) request.getAttribute("hos");
+%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>병원 탈퇴</title>
 <script>
     <c:if test="${not empty errorMsg}">
         window.onload = function() {
             alert("<c:out value='${errorMsg}' />");
         };
     </c:if>
+</script>
+<script>
+function hosDetail(hosId) {
+    location.href = "/getHos?hos_id=" + hosId;
+}
 </script>
 <style>
 #toHosDelButton{
@@ -40,10 +52,10 @@ text-align:center;
 	<!-- 	웹에서 보이는 메뉴 시작 -->
 	<div id="menuDiv">
 		<div class="row" id="flex">
-			<div class="col-md-8 leftDiv">회원 탈퇴</div>
+			<div class="col-md-8 leftDiv"><h2>마이페이지</h2></div>
 			<div class="col-md-4 rightDiv">
 				<div class="wrapDiv">
-					<div class="handDivR" onclick="location.href='getHos'" style="padding:15px;"><b>내<br>병원</b></div>
+					<div class="handDivR" onclick="hosDetail('<%= hospital.getHos_id() %>')" style="padding:15px;"><b>내<br>병원</b></div>
 					<div class="oneDivR circleDiv"></div>
 					<div class="twoDivR circleDiv"></div>
 					<div class="threeDivR circleDiv"></div>
@@ -84,7 +96,7 @@ text-align:center;
          </div>
          <div class="row mobileMy_memu mobileMymemu1">
             <div class="col">
-               <div class="mobileMy_wrap" onclick="location.href='getHos'">
+               <div class="mobileMy_wrap" onclick="hosDetail('<%= hospital.getHos_id() %>')">
                <b>내 병원</b>
                </div>
             </div>

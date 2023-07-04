@@ -2,9 +2,7 @@ package com.springbook.view.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -12,11 +10,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
+import com.spring.pet.hospital.HospitalService;
 import com.spring.pet.hospital.HospitalVO;
 import com.spring.pet.review.ReviewService;
 import com.spring.pet.review.ReviewVO;
@@ -37,6 +36,9 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
+	
+	@Autowired
+	private HospitalService hospitalService;
 
 	// 상대경로를 절대경로로 변경해주는 로직
 	// public String insertBoard(MultipartHttpServletRequest request, BoardVO vo)
@@ -130,10 +132,10 @@ public class ReviewController {
 	}
 //  [병원회원] 리뷰 상세 조회
 	@RequestMapping("/hosGetReviewDetails")
-	public String hosGetReviewDetails(ReviewVO vo, Model model) {
-		// Model model 인터페이스 객체를 자동으로 만듬.
-		System.out.println("===ReviewController hosGetReviewDetails 시작===");
-		System.out.println(vo.getRev_hos_seq());
+	public String hosGetReviewDetails(ReviewVO vo, Model model, HttpSession session) {
+		HospitalVO hvo = new HospitalVO();
+        hvo.setHos_id((String) session.getAttribute("hos_id"));
+        model.addAttribute("hos", hospitalService.getHos(hvo));
 		model.addAttribute("review", reviewService.hosGetReviewDetails(vo));
 //				=> 데이터를 담기만해도 어차피 포워드로 전송이 되기때문에 MAV 객체를 쓸 필요가 없다
 		return "/hosMyPage/hosGetReviewDetails";

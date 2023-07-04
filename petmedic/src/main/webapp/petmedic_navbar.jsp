@@ -207,8 +207,7 @@ function getHosListCate(val){
                     아이디와 비밀번호를 확인해 주세요
                 </div>
                 <div class="text-right">
-            <a href="beforeHosJoin" id="loginmodaltxt" class="seonchanaclass">병원등록</a> | <a href="forgothosId" id="loginmodaltxt" class="seonchanaclass">아이디찾기</a> | <a href="resethosPassword" id="loginmodaltxt" class="seonchanaclass">비밀번호 재설정</a>
-            <br><br> 
+				<a href="beforeHosJoin" id="loginmodaltxt" class="seonchanaclass">병원등록</a> | <a href="forgothosId" id="loginmodaltxt" class="seonchanaclass">아이디찾기</a> | <a href="resethosPassword" id="loginmodaltxt" class="seonchanaclass">비밀번호 재설정</a>            <br><br> 
         </div>
                 
             <button class="btn btn btn-lg btn-success btn-block" id="navbarloginbt" onclick="hosLoginCheck()" type="button">로그인</button>

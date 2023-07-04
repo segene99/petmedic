@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ include file="../../header.jsp"%>
+	<%@ page import="com.spring.pet.hospital.HospitalVO" %>
+	<%@ include file="../../header.jsp"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	<%@ page import="java.text.SimpleDateFormat" %>
+	<%@ page import="java.util.Date" %>
+<%
+	HospitalVO hospital = (HospitalVO) request.getAttribute("hos");
+%>
 <%
 String sts = "";
 if (session.getAttribute("users_id") == null) {
@@ -92,7 +99,9 @@ function reportRev(){
 	
 }
       
-      
+function hosDetail(hosId) {
+    location.href = "/getHos?hos_id=" + hosId;
+}     
       
 </script>
 
@@ -118,7 +127,7 @@ function reportRev(){
 			<div class="col-md-8 leftDiv"><h2>마이페이지</h2></div>
 			<div class="col-md-4 rightDiv">
 				<div class="wrapDiv">
-					<div class="handDivR" onclick="location.href='getHos'" style="padding:15px;"><b>내<br>병원</b></div>
+					<div class="handDivR" onclick="hosDetail('<%= hospital.getHos_id() %>')" style="padding:15px;"><b>내<br>병원</b></div>
 					<div class="oneDivR circleDiv"></div>
 					<div class="twoDivR circleDiv"></div>
 					<div class="threeDivR circleDiv"></div>
@@ -160,7 +169,7 @@ function reportRev(){
          </div>
          <div class="row mobileMy_memu mobileMymemu1">
             <div class="col">
-               <div class="mobileMy_wrap" onclick="location.href='getHos'">
+               <div class="mobileMy_wrap" onclick="hosDetail('<%= hospital.getHos_id() %>')">
                <b>내 병원</b>
                </div>
             </div>
@@ -243,7 +252,9 @@ function reportRev(){
 						</div>
 						<div class="col-9 text-rev-box-right">
 							<div class="text-rev-box-right-inner-hos">
-								${review.rev_title}
+								<input class="textareabordergray" type="text"
+									style="border: none;" name="rev_title" placeholder="제목을 입력하세요."
+									value="${review.rev_title}">
 							</div>
 							<div class="text-rev-box-right-inside text-rev-box-right-inner-hos">
 								<span>${review.res_date} ${review.res_time}</span>
@@ -302,7 +313,6 @@ function reportRev(){
 						<input type="hidden" class="form-control innm" name="hos_name" value="${review.hos_name}"> 
 						<input type="hidden" class="form-control innm" name="regDate" value="${review.res_date}">
 				
-				<c:if test="${review.rev_req eq 'B'}">
 					<div class="container revDetailMargin blurblur">
 					<br>
 					<h5><strong>리뷰신고작성</strong></h5>
@@ -318,12 +328,11 @@ function reportRev(){
 							</div>
 								
 					</div>
-				</c:if>
 				</form>
 			</c:if>	
 			
 		</div>
-
+	</div>
 
 <%@ include file="../../footer.jsp"%>
 </body>
