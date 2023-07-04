@@ -13,6 +13,7 @@
 		width: 100%
 	}
 }
+
 @media all and (min-width:768px) and (max-width:1500px) {
 	.visualbox {
 		position: static;
@@ -35,11 +36,10 @@
 		padding: 0 35px;
 	}
 	
-
-	
-	.main_contentsDiv1, .main_contentsDiv2 {
-/* 		margin-left: 30px; */
+	.main_contentsDiv1, .main_contentsDiv2, .main_contentsDiv3 {
+		padding: 30px 10px 30px 10px;
 	}
+	
 	.main_notice_h4, .main_hospital_h4 {
 		font-weight: bold;
 		width: 100%;
@@ -54,7 +54,7 @@
 		margin: 0;
 		padding: 0;
 	}
-	#notice_plus, #hospital_plus {
+	#notice_plus, #hospital_plus, #youtube_plus {
 		display: flex;
 		justify-content: end;
 		text-decoration: none;
@@ -78,8 +78,8 @@
 	}
 	#main_Allcontainer {
 		width: 100%;
-		margin-top: 25%;
-		margin-bottom: 7%;
+/* 		margin-top: 35%; */
+/* 		margin-bottom: 7%; */
 		text-align: left;
 	}
 	.main_hospital_container {
@@ -108,32 +108,19 @@
 		justify-content: end;
 		font-size: 0.7em;
 	}
-	.main_notice_more, .main_hospital_more {
+	.main_notice_more, .main_hospital_more, .main_youtube_more {
 		display: flex;
 		width: 100%;
 		align-items: center;
 		border-bottom: 3px solid black;
 		padding-bottom: 15px;
-		margin-top: 30px;
 	}
-	.main_notice_p, .main_notice_p {
+	.main_notice_p, .main_hospital_p, .main_youtube_p {
 		margin-right: 10px; /* p와 a 태그 사이에 10px의 공백 추가 */
 		font-size: 1.3em;
 		font-weight: bolder;
 	}
-	.main_notice_p:before, .main_notice_p:before {
-		display: block;
-		position: absolute;
-		left: 12px;
-		right: 300px;
-		bottom: 331px;
-		z-index: -1;
-		content: '';
-		width: auto;
-		height: 8px;
-		background: #ffc10745;
-	}
-	#notice_plus, #hospital_plus {
+	#notice_plus, #hospital_plus,#youtube_plus {
 		margin-left: auto; /* a 태그를 줄의 맨 오른쪽으로 정렬 */
 		color: #006940ff;
 		font-size: 25px;
@@ -156,13 +143,10 @@
 	}
 	.maincarousel-inner img {
 		width: 100%;
-		height: 270px;
 		object-fit: cover;
 		object-position: center;
 	}
-	.maincarousel-indicators {
-		bottom: 0;
-	}
+	
 	.maincarousel-control-prev, .maincarousel-control-next {
 		top: calc(50% - 1rem);
 	}
@@ -242,9 +226,9 @@
 
 
 
-	/* 케러셀 병원등록 */
+	/* 캐러셀 병원등록 */
 	
-	.hospital-absolute2,.hospital-absolute3 {
+	.maincarousel-indicators,.carousel-indicators {
 		display: none;
 	}
 	
@@ -304,7 +288,7 @@
 	}
 	
 	
-	/* 케러셀 예약등록*/
+	/* 캐러셀 예약등록*/
 	.reserve-absolute {
 		float:right;
 		background-color: #7EC243;
@@ -346,12 +330,6 @@
 	  align-items: center;
 	}
 	
-	/*.reserve-absolute-span2 {
-	  display: flex;
-	  align-items: center;
-	}*/
-
-	
 	.main-faq-span,.main-faq-span3 {
 		font-size: 0.95em;
 	}
@@ -375,6 +353,7 @@
 
 /* 모바일에 대한 스타일 정의 시작~*/
 @media all and (max-width:767px) {
+	
   .visualbox {
 		position: static;
 	}
@@ -388,9 +367,9 @@
 	.visualbox .reserve-absolute {
 		text-align: center;
 	}
-	.main_contentsDiv1, .main_contentsDiv2 {
-/* 		margin-left: 30px; */
-		margin-top: 50px;
+	.main_contentsDiv1, .main_contentsDiv2, .main_contentsDiv3 {
+		padding: 30px 30px;
+    	text-align: center;
 	}
 	.main_notice_h4, .main_hospital_h4 {
 		font-weight: bold;
@@ -406,7 +385,7 @@
 		margin: 0;
 		padding: 0;
 	}
-	#notice_plus, #hospital_plus {
+	#notice_plus, #hospital_plus,#youtube_plus {
 		display: flex;
 		justify-content: end;
 		text-decoration: none;
@@ -460,33 +439,20 @@
 		justify-content: end;
 		font-size: 0.7em;
 	}
-	.main_notice_more, .main_hospital_more {
+	.main_notice_more, .main_hospital_more,.main_youtube_more {
 		display: flex;
 		width: 100%;
 		align-items: center;
 		border-bottom: 3px solid black;
 		padding-bottom: 15px;
-		margin-top: 30px;
 	}
-	.main_notice_p, .main_notice_p {
+	.main_notice_p, .main_hospital_p, .main_youtube_p {
 		margin-right: 10px; /* p와 a 태그 사이에 10px의 공백 추가 */
 		font-size: 1.3em;
 		font-weight: bolder;
 	}
-	/*.main_notice_p:before, .main_notice_p:before {
-		display: block;
-		position: absolute;
-		left: 12px;
-		right: 300px;
-		bottom: 331px;
-		z-index: -1;
-		content: '';
-		width: auto;
-		height: 8px;
-		background: #ffc10745;
-	}*/
 	
-	#notice_plus, #hospital_plus {
+	#notice_plus, #hospital_plus,#youtube_plus {
 		margin-left: auto; /* a 태그를 줄의 맨 오른쪽으로 정렬 */
 		color: #006940ff;
 		font-size: 25px;
@@ -509,7 +475,7 @@
 	}
 	.maincarousel-inner img {
 		margin: 0; 
-		height: 200px;
+		height: 190px;
 		width: 100%;
 		object-fit: cover;
 		object-position: center;
@@ -595,47 +561,19 @@
 
 
 
-	/* 케러셀 병원등록 */
+	/* 캐러셀 병원등록 */
 	
-	.hospital-absolute-h4,.reserve-absolute-h4, .hospital-absolute,.hospital-absolute-span{
-		display: none;
-	}
+	.hospital-absolute-h4, .reserve-absolute-h4, .hospital-absolute,
+	.hospital-absolute-span, .maincarousel-indicators, .carousel-indicators {
+	display: none;
+}
 
-	.carousel-container {
+.carousel-container {
 		position: relative;
 	}
 	
-	.hospital-absolute2 {
-		float:left;
-		background-color: #016A41;
-		width: 50%;
-	}
 	
-	.hospital-absolute3 {
-		float:right;
-		background-color: #005c39;
-		width: 50%;
-	}
-	
-	.hospital-absolute-btn2,.hospital-absolute-btn3 {
-		text-align: center;
-	}
-	
-	.hospital-absolute-img{
-		width: 80px;
-		height: auto;
-	}
-	
-	.h-span1{
-		font-size: 1em;
-		font-weight:bold;
-		color: white;
-		display: block;
-		text-align: center;
-	}
-	
-	
-	/* 케러셀 예약등록*/
+	/* 캐러셀 예약등록*/
 	.reserve-absolute {
 		float:right;
 		background-color: #7EC243;
@@ -700,6 +638,10 @@
 
 /* 웹에 대한 스타일 정의 시작~*/
 @media all and (min-width:1500px) {
+	.carousel-control-next-icon .maincarousel-control-next-icon, .carousel-control-prev-icon, .maincarousel-control-prev-icon{
+	display: none;
+	}
+	
 	.visualbox .group {
 		padding: 40px 15px 0 15px;
 	}
@@ -707,9 +649,9 @@
 		text-align: center;
 	}
 	
-.main_contentsDiv1, .main_contentsDiv2 {
-/* 	margin-left: 30px; */
-/*  margin-top: 30px; */
+	
+.main_contentsDiv1, .main_contentsDiv2, .main_contentsDiv3 {
+	margin-left: 30px;
 }
 
 .main_notice_h4, .main_hospital_h4 {
@@ -728,7 +670,7 @@
 	padding: 0;
 }
 
-#notice_plus, #hospital_plus {
+#notice_plus, #hospital_plus, #youtube_plus {
 	display: flex;
 	justify-content: end;
 	text-decoration: none;
@@ -790,7 +732,7 @@ em.emm {
 	font-size: 0.7em;
 }
 
-.main_notice_more, .main_hospital_more {
+.main_notice_more, .main_hospital_more, .main_youtube_more {
 	display: flex;
 	width: 100%;
 	align-items: center;
@@ -798,26 +740,14 @@ em.emm {
 	padding-bottom: 15px;
 }
 
-.main_notice_p, .main_notice_p {
+.main_notice_p, .main_hospital_p,.main_youtube_p {
 	margin-right: 10px; /* p와 a 태그 사이에 10px의 공백 추가 */
 	font-size: 1.3em;
 	font-weight: bolder;
 }
 
-.main_notice_p:before, .main_notice_p:before {
-	display: block;
-    position: absolute;
-    left: 12px;
-    right: 300px;
-    bottom: 331px;
-    z-index: -1;
-    content: '';
-    width: auto;
-    height: 8px;
-    background: #ffc10745;
-}
 
-#notice_plus, #hospital_plus {
+#notice_plus, #hospital_plus, #youtube_plus {
 	margin-left: auto; /* a 태그를 줄의 맨 오른쪽으로 정렬 */
 	color: #006940ff;
 	font-size: 25px;
@@ -856,15 +786,7 @@ em.emm {
 }
 
 
-.maincarousel-control-prev {
-  position: absolute;
-  left: -10px; /* 왼쪽 위치 조정값 */
-}
 
-.maincarousel-control-next {
-  position: absolute;
-  right: 1200px; /* 오른쪽 위치 조정값 */
-}
 /* 메인 캐러셀 글씨 */
 .maincarousel-caption {
 	position: absolute;
@@ -946,9 +868,11 @@ span.carousel-text1:before {
 
 
 
-/* 케러셀 병원등록 */
+/* 캐러셀 병원등록 */
 
-.hospital-absolute2,.hospital-absolute3 {
+.carousel-control-prev,
+	.maincarousel-control-prev, .carousel-control-next,
+	.maincarousel-control-next {
 	display: none;
 }
 
@@ -1017,7 +941,7 @@ span.carousel-text1:before {
 	margin-bottom: 15px;
 }
 
-/* 케러셀 예약등록*/
+/* 캐러셀 예약등록*/
 .reserve-absolute {
 	position: absolute;
 	top: 225px;

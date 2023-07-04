@@ -22,6 +22,9 @@ if (roleError != null) {
 <html>
 
 <head>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
 <script>
 	//캐로셀 시작
@@ -82,52 +85,6 @@ if (roleError != null) {
 				console.log('베스트목록 에러');
 			}
 		});
-
-		// 		//별점순
-		// 		$.ajax({
-		// 			url : "revHighStar",
-		// 			method : "POST",
-		// 			data : hosListStar,
-		// 			dataType : "json",
-		// 			success : function(response) {
-		// 				// Handle the response from the server
-		// 				console.log("revstar");
-		// 				console.log(response);
-
-		// 				// You can perform any necessary actions here
-		// 				// For example, update the UI to reflect the thumbs up status
-
-		// 				highhosstar(response);
-
-		// 			},
-		// 			error : function(xhr, status, error) {
-		// 				// Handle errors
-		// 				console.error(error);
-		// 			}
-		// 		});
-		// 		//리뷰순 
-		// 		$.ajax({
-		// 			url : "getManyRevHos",
-		// 			method : "POST",
-		// 			data : hosListRev,
-		// 			dataType : "json",
-		// 			success : function(reviews) {
-		// 				// Handle the response from the server
-		// 				console.log("getManyRevHos");
-		// 				console.log(reviews);
-
-		// 				// You can perform any necessary actions here
-		// 				// For example, update the UI to reflect the thumbs up status
-
-		// 				manyGetRevHos(reviews);
-
-		// 			},
-		// 			error : function(xhr, status, error) {
-		// 				// Handle errors
-		// 				console.error(error);
-		// 			}
-		// 		});
-
 	});
 
 	//베스트병원 가져와서 메인에 출력해주기
@@ -179,7 +136,7 @@ if (roleError != null) {
 						+ "</span> <em class=\"emm\">"
 						+ dateNotYM
 						+ "</em></span> "
-						+ "<a class=\"notice_a\" href=\"/getNoticeDetail?notice_int="
+						+ "<a class=\"notice_a\" href=\"/getNoticeDetail_index?notice_int="
 						+ res[0].notice_int
 						+ "\"> "
 						+ indexNotTitle
@@ -189,8 +146,6 @@ if (roleError != null) {
 
 		$('ul.maincontentsNotice').html(indexNotHtml);
 	}
-
-	//공지사항 메인 끝
 </script>
 <meta charset="UTF-8">
 <title>PetMedic Main</title>
@@ -202,6 +157,13 @@ if (roleError != null) {
 		<div class="carousel-container">
 			<div id="maincarousel">
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+					<!-- Indicators -->
+					<ol class="carousel-indicators">
+						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+						<li data-target="#myCarousel" data-slide-to="1"></li>
+						<li data-target="#myCarousel" data-slide-to="2"></li>
+					</ol>
 
 					<!-- The slideshow -->
 					<div class="carousel-inner maincarousel-inner">
@@ -250,7 +212,7 @@ if (roleError != null) {
 
 					<!-- Left and right controls -->
 					<a class="carousel-control-prev maincarousel-control-prev"
-						href="#myCarousel" data-slide="prev"> <span
+						href="#myCarousel" data-slide="prev"><span
 						class="carousel-control-prev-icon maincarousel-control-prev-icon"></span>
 					</a> <a class="carousel-control-next maincarousel-control-next"
 						href="#myCarousel" data-slide="next"> <span
@@ -266,29 +228,14 @@ if (roleError != null) {
 						<span class="hospital-absolute-h4">병원등록하기</span>
 
 						<div class="hospital-absolute-btn">
-							<button class="hospital-absolute-btn1">등록신청</button>
+							<button class="hospital-absolute-btn1"
+								onclick="gobeforeHosJoin()">등록신청</button>
 						</div>
 
 						<div class="hospital-absolute-span">
 							<span class="main-hos-span">영업일(주말,공휴일 제외)기준 오후 6시</span><br>
 							<span class="main-hos-span">이후 건은 다음날 승인 처리됩니다.</span><br> <span
 								class="main-hos-span">평일: 09:00~18:00</span>
-						</div>
-					</div>
-
-					<div class="hospital-absolute2 group ">
-						<div class="hospital-absolute-btn2">
-							<a href="#"> <img class="hospital-absolute-img"
-								src="${pageContext.request.contextPath}/img/메인병원등록.png"> <span
-								class="h-span1">병원등록</span></a>
-						</div>
-					</div>
-
-					<div class="hospital-absolute3 group ">
-						<div class="hospital-absolute-btn3">
-							<a href="#"> <img class="hospital-absolute-img"
-								src="${pageContext.request.contextPath}/img/메인의사회원.png"> <span
-								class="h-span1">병원회원가입</span></a>
 						</div>
 					</div>
 
@@ -299,12 +246,13 @@ if (roleError != null) {
 						<span class="reserve-absolute-h4">간편예약</span>
 						<div class="reserve-absolute-btn">
 							<div class="r-layout">
-								<a href="#"> <img id="r-btn-img1"
+								<a href="getBestHosList"> <img id="r-btn-img1"
 									src="${pageContext.request.contextPath}/img/카테고리-002.png">
-									<span class="r-span1">진료예약</span></a> <a href="#"> <img
-									id="r-btn-img2"
+									<span class="r-span1">진료예약</span></a> <a href="searchHospitalList">
+									<img id="r-btn-img2"
 									src="${pageContext.request.contextPath}/img/위치-002.png">
-									<span class="r-span2">내주변예약</span></a>
+									<span class="r-span2">내주변예약</span>
+								</a>
 							</div>
 
 							<div class="reserve-absolute-span">
@@ -313,9 +261,10 @@ if (roleError != null) {
 										src="${pageContext.request.contextPath}/img/메인문의사항.png">
 								</div>
 								<div class="reserve-absolute-span2">
-									<span class="main-faq-span">기타 문의사항은&nbsp; </span> <a href="#"><span
-										class="main-faq-span2">FAQ</span></a> <span class="main-faq-span3">를&nbsp;</span>
-									<span class="main-faq-span">이용해주세요.</span>
+									<span class="main-faq-span">기타 문의사항은&nbsp; </span> <a
+										href="togetFaqList"><span class="main-faq-span2">FAQ</span></a>
+									<span class="main-faq-span3">를&nbsp;</span> <span
+										class="main-faq-span">이용해주세요.</span>
 								</div>
 							</div>
 						</div>
@@ -340,9 +289,10 @@ if (roleError != null) {
 						</ul>
 					</div>
 
-					<div class="main_contentsDiv col-lg-3">
+
+					<div class="main_contentsDiv2 col-lg-3">
 						<div class="main_hospital_more">
-							<h4 class="main_notice_h4">BEST 병원</h4>
+							<h4 class="main_hospital_p">BEST 병원</h4>
 							<a id="hospital_plus" href="getBestHosList">+</a>
 						</div>
 
@@ -351,9 +301,11 @@ if (roleError != null) {
 					</div>
 					<!-- 유튜브 캐러셀 -->
 					<div class="main_contentsDiv3 col-lg-5">
-						<!-- 	유튜브동영상 넣기 -->
-						<div class="main_hospital_more">
-							<h4 class="main_notice_h4">알면 좋은 반려인 상식</h4>
+
+						<!--    유튜브동영상 넣기 -->
+						<div class="main_youtube_more">
+							<h4 class="main_youtube_p">알면 좋은 반려인 상식</h4>
+							<a id="youtube_plus" href="#" style="visibility: hidden;">+</a>
 						</div>
 						<div class="swiper mySwiper">
 							<div class="swiper-wrapper">
@@ -428,20 +380,20 @@ if (roleError != null) {
 										allowfullscreen></iframe>
 								</div>
 							</div>
-							 <div class="swiper-scrollbar"></div>	  				 	
+							<div class="swiper-scrollbar"></div>
 						</div>
-						 
-						
-							    
+
+
+
 
 						<!-- Initialize Swiper -->
 						<script>
-						 var swiper = new Swiper(".mySwiper", {
-							  scrollbar: {
-							        el: ".swiper-scrollbar",
-							        hide: false,
-							      },
-						    });
+							var swiper = new Swiper(".mySwiper", {
+								scrollbar : {
+									el : ".swiper-scrollbar",
+									hide : false,
+								},
+							});
 						</script>
 
 
@@ -450,6 +402,8 @@ if (roleError != null) {
 			</div>
 		</div>
 	</div>
+
+
 
 
 	<%@ include file="footer.jsp"%>
