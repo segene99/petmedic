@@ -18,7 +18,7 @@ border-collapse: collapse;
 border: none;
 }
 .blurblur {
-    width: 70%;
+/*     width: 70%; */
     margin: 0 auto;
 }
 

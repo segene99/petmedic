@@ -118,9 +118,8 @@ public class HospitalController {
 
 	// 병원 상세페이지 메인
 		@RequestMapping("/getHos")
-		public String getHos(@RequestParam("hos_id") String hosId, HospitalVO vo,UsersVO uvo, Model model, HttpSession session) {
+		public String getHos(HospitalVO vo,UsersVO uvo, Model model, HttpSession session) {
 			uvo.setUsers_id((String)session.getAttribute("users_id"));
-			vo.setHos_id(hosId);
 			model.addAttribute("hos", hospitalService.getHos(vo));
 			model.addAttribute("users",userService.getUserInfo(uvo));
 			return "/hospital/hosDetail";
