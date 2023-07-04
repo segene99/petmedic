@@ -84,10 +84,12 @@ font-size: 0.85rem;
 height: 100%;
 margin: auto 0;
 margin-bottom: 15px;
+text-align:center;
 }
 
 
 #hosDetailTableDiv table th{
+text-align: center;
 background-color:#006940ff;
 padding: 3px 25px;
 color:white;

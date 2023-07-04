@@ -212,4 +212,19 @@ public class UsersServiceImpl implements UsersService {
 		public void updateUsersPhone(UsersVO vo) {
 			usersDAO.updateUsersPhone(vo);
 		}	
+		
+		@Override
+		public UsersVO hosZzim(UsersVO vo) {
+			return usersDAO.hosZzim(vo);
+		}
+		
+		@Override
+		public int hosZzimInsert(UsersVO vo) {
+			return usersDAO.hosZzimInsert(vo);
+		}
+		
+		@Override
+		public void delZzim(UsersVO vo) {
+			usersDAO.delZzim(vo);
+		}
 }

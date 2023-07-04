@@ -117,36 +117,29 @@ public class HospitalController {
 
 
 	// 병원 상세페이지 메인
-	@RequestMapping("/getHos")
-	public String getHos(HospitalVO vo, Model model, HttpSession session) {
-		System.out.println("아이디: " + session.getAttribute("users_id"));
-		System.out.println("병원아이디: " + session.getAttribute("hos_id"));
-		
-		System.out.println("병원 컨트롤러 : " + vo);
-//		vo.setHos_id((String)session.getAttribute("hos_id"));
-		model.addAttribute("hos", hospitalService.getHos(vo));
+		@RequestMapping("/getHos")
+		public String getHos(HospitalVO vo,UsersVO uvo, Model model, HttpSession session) {
+			uvo.setUsers_id((String)session.getAttribute("users_id"));
+			model.addAttribute("hos", hospitalService.getHos(vo));
+			model.addAttribute("users",userService.getUserInfo(uvo));
+			return "/hospital/hosDetail";
+		}
 
-		return "/hospital/hosDetail";
-
-	}
-
-	// 검색에서 병원상세로
-	@RequestMapping("/getHosInfo")
-	public String getHosInfo(@RequestParam("hos_addr2") String hosAddr2, @RequestParam("hos_addr3") String hosAddr3,
-			@RequestParam("hos_name") String hosName, @RequestParam("hos_tel") String hosTel, Model model) {
-		System.out.println("왔냐");
-		HospitalVO vo = new HospitalVO();
-		vo.setHos_addr2(hosAddr2);
-		vo.setHos_addr3(hosAddr3);
-		vo.setHos_name(hosName);
-		vo.setHos_tel(hosTel);
-
-		System.out.println(vo.getHos_addr2());
-		System.out.println(vo.getHos_addr3());
-		model.addAttribute("hos", hospitalService.getHosInfo(vo));
-
-		return "/hospital/hosDetail";
-	}
+		// 검색에서 병원상세로
+		@RequestMapping("/getHosInfo")
+		public String getHosInfo(@RequestParam("hos_addr2") String hosAddr2, @RequestParam("hos_addr3") String hosAddr3,
+				@RequestParam("hos_name") String hosName, @RequestParam("hos_tel") String hosTel, Model model,
+				UsersVO uvo,HttpSession session) {
+			HospitalVO vo = new HospitalVO();
+			vo.setHos_addr2(hosAddr2);
+			vo.setHos_addr3(hosAddr3);
+			vo.setHos_name(hosName);
+			vo.setHos_tel(hosTel);
+			uvo.setUsers_id((String)session.getAttribute("users_id"));
+			model.addAttribute("hos", hospitalService.getHosInfo(vo));
+			model.addAttribute("users",userService.getUserInfo(uvo));
+			return "/hospital/hosDetail";
+		}
 
 //병원 상세정보
 	@RequestMapping("/toHosInfo")
@@ -976,12 +969,76 @@ public class HospitalController {
 			   
 			// 병원 상세 [찜목록에서 이동]
 			   @RequestMapping("/getHosDetailZzim")
-			   public String getHosDetail(HospitalVO vo, Model model) {
-			      System.out.println("병원 컨트롤러 : " + vo);
-			       System.out.println("저장된 호스아이디: " + vo.getHos_id());
+			   public String getHosDetail(HospitalVO vo, Model model, UsersVO uvo,HttpSession session) {
+			     uvo.setUsers_id((String)session.getAttribute("users_id"));
 			       model.addAttribute("hos", hospitalService.getHos(vo));
+			       model.addAttribute("users",userService.getUserInfo(uvo));
 			       return "/hospital/hosDetail";
 			   }
+			   
+			   @RequestMapping("/hosZzim")
+			   @ResponseBody
+			   public String hosZzim(UsersVO uvo) {
+			   	String hosId = uvo.getHos_id();
+			   	UsersVO tvo = userService.hosZzim(uvo);
+			   	System.out.println("울랄라"+tvo);
+			   	String up1 = tvo.getUsers_pick1(); 
+			   	String up2 = tvo.getUsers_pick2(); 
+			   	String up3 = tvo.getUsers_pick3(); 
+			   	String up4 = tvo.getUsers_pick4(); 
+			   	String up5 = tvo.getUsers_pick5(); 
+			   	
+			   	String[] userPick = {up1, up2, up3, up4, up5};
+			   	
+			   	int index = -1;
+			   	for (String item : userPick) { // 찜목록에 해당 병원이 있는지
+			   	    if (item != null && item.equals(hosId)) {
+			   	    	for (int i = 0; i < userPick.length; i++) {
+			   	    	    if (userPick[i] != null && userPick[i].equals(hosId)) {
+			   	    	        index = i;
+			   	    	        break;
+			   	    	    }
+			   	    	}
+			   	    
+			       	uvo.SetUp(index+1);
+			       	userService.delZzim(uvo);
+			   	    	return "1";
+			   	    }
+			   	}
+			   	int userPickNullCnt = 0;
+			   	for(String item : userPick) { //찜 목록이 가득 찼는지
+			   		if(item == null) {
+			   			userPickNullCnt++;
+			   		}
+			   	}
+			   	if(userPickNullCnt == 0) {//찜목록이 가득 참
+			   		return "2";
+			   	}else{
+			   		// 찜목록 추가
+			   		// null이 있는 가장 앞 인덱스 찾기
+			   		int index1 = -1;
+			   		for (int i = 0; i < userPick.length; i++) {
+			   		    if (userPick[i] == null) {
+			   		        index1 = i;
+			   		        break;
+			   		    }
+			   		}
+			   		
+			   		uvo.SetUp(index1+1);
+			   	int zzimResult = userService.hosZzimInsert(uvo);
+			   	
+			   	if(zzimResult>0) {
+			   		return "zzimSuc"; //찜목록에 넣기 성공
+			   	}else {
+			   		return "zzimNo";
+			   	}
+			   	
+			   		
+			   	}
+			   	
+			   	
+			   }
+			   
 			   
 			// 아이디 중복체크
 				@RequestMapping("/idDupCheck1")

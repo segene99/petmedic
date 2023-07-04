@@ -48,9 +48,17 @@ public class UsersVO {
 		private String delZzim;
 		private int cnt; 		// 찜컬럼 카운트용	
 
-	//	gettersetter
 		
-		
+		private int uP;
+
+
+		public int getUp() {
+			return uP;
+		}
+
+		public void SetUp(int up) {
+			this.uP = up;
+		}
 		
 		
 		public String getUsers_id() {

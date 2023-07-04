@@ -242,6 +242,38 @@
        FROM users
        WHERE users_id = #{users_id}
    </select>	
+	
+	<update id="hosZzimInsert1">
+   	update users set users_pick1 = #{hos_id} where users_id=#{users_id};
+   </update>
+   <update id="hosZzimInsert2">
+   	update users set users_pick2 = #{hos_id} where users_id=#{users_id};
+   </update>
+   <update id="hosZzimInsert3">
+   	update users set users_pick3 = #{hos_id} where users_id=#{users_id};
+   </update>
+   <update id="hosZzimInsert4">
+   	update users set users_pick4 = #{hos_id} where users_id=#{users_id};
+   </update>
+   <update id="hosZzimInsert5">
+   	update users set users_pick5 = #{hos_id} where users_id=#{users_id};
+   </update>
+   
+   <update id="hosZzimDel1">
+   	update users set users_pick1 = null where users_id=#{users_id};
+   </update>
+   <update id="hosZzimDel2">
+   	update users set users_pick2 = null where users_id=#{users_id};
+   </update>
+   <update id="hosZzimDel3">
+   	update users set users_pick3 = null where users_id=#{users_id};
+   </update>
+   <update id="hosZzimDel4">
+   	update users set users_pick4 = null where users_id=#{users_id};
+   </update>
+   <update id="hosZzimDel5">
+   	update users set users_pick5 = null where users_id=#{users_id};
+   </update>
 		
 </mapper>
   

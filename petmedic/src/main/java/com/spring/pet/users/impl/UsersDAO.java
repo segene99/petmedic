@@ -246,4 +246,41 @@ public class UsersDAO {
 		mybatis.update("UsersDAO.updateUsersPhone", vo);
 	}
 
+	public UsersVO hosZzim(UsersVO vo) {
+		return mybatis.selectOne("UsersDAO.getUsersHos",vo);
+	}
+	
+	public int hosZzimInsert(UsersVO vo) {
+		int vouP = vo.getUp();
+		
+		if(vouP == 1) {
+			return mybatis.update("UsersDAO.hosZzimInsert1",vo);
+		}else if(vouP == 2) {
+			return mybatis.update("UsersDAO.hosZzimInsert2",vo);
+		}else if(vouP == 3) {
+			return mybatis.update("UsersDAO.hosZzimInsert3",vo);
+		}else if(vouP == 4) {
+			return mybatis.update("UsersDAO.hosZzimInsert4",vo);
+		}else {
+			return mybatis.update("UsersDAO.hosZzimInsert5",vo);
+		}
+		
+	}
+	
+	public void delZzim(UsersVO vo) {
+		int vouP = vo.getUp();
+		
+		if(vouP == 1) {
+			mybatis.update("UsersDAO.hosZzimDel1",vo);
+		}else if(vouP == 2) {
+			mybatis.update("UsersDAO.hosZzimDel2",vo);
+		}else if(vouP == 3) {
+			mybatis.update("UsersDAO.hosZzimDel3",vo);
+		}else if(vouP == 4) {
+			mybatis.update("UsersDAO.hosZzimDel4",vo);
+		}else {
+			mybatis.update("UsersDAO.hosZzimDel5",vo);
+		}
+	}
+	
 }

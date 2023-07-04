@@ -69,4 +69,11 @@ public interface UsersService {
 		
 		// 회원 연락처 수정
 		void updateUsersPhone(UsersVO vo);	
+		
+		UsersVO hosZzim(UsersVO vo);
+		
+		int hosZzimInsert(UsersVO vo);
+
+		void delZzim(UsersVO vo);
+		
 }

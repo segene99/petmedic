@@ -74,7 +74,7 @@ function getHosListCate(val){
 				<li><a href="togetFaqList" class="nav-link petmedicnav-link"> <b id="navb">FAQ</b></a></li>
 				
 				<c:if test="${hos_role ne 'Y'}">
-				<li class="nav-item"><a href="/beforeHosJoin" class="nav-link petmedicnav-link"> <b id="navb">병원등록</b></a></li>
+				<li class="nav-item"><a href="beforeHosJoin" class="nav-link petmedicnav-link"> <b id="navb">병원등록</b></a></li>
 				</c:if>
 				
 				<c:if test="${users_id ne NULL}">
@@ -87,12 +87,11 @@ function getHosListCate(val){
 		</div>
 	</div>
 		
-<!-- 	<div id="cateSearchNavDiv"> -->
 	<div id="NavBarSearchDiv">
-		<form id="catsearch" action="getHosListUser" method="post">
+		<form id="navsearch" action="getHosListUser" method="post" style="margin:0;">
 			<div id="navSearchContainer">
 				<select class="search-select" id="searchConditionNav"
-					name="searchCondition" style="border: none;">
+					name="searchCondition" style="border: none; background: transparent;">
 					<option value="hos_addr">주소</option>
 					<option value="hos_star">별점</option>
 					<option value="hos_name">병원명</option>
