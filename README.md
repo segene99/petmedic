@@ -21,9 +21,8 @@
    -  ![병원검색 (1)](https://github.com/segene99/petmedic/assets/112309011/b7746cfa-b315-463c-bb84-64b2d44696db)
 
 4. AWS EC2를 활용한 웹사이트 도메인 배포
-   http://www.petmedic.kro.kr
    
-6. 프로젝트 통합/시스템테스트 총괄
+5. 프로젝트 통합/시스템테스트 총괄
    - git 사용을 할 줄 모르는 상태여서 직접 파일을 받아 수행함. 현재는 git활용하여 commit/pull/push/merge 수행
    - ![image](https://github.com/segene99/petmedic/assets/112309011/281365a0-27f9-4671-80fa-e335aa113b5f)
 
