@@ -36,6 +36,6 @@
    - ![image](https://github.com/segene99/petmedic/assets/112309011/281365a0-27f9-4671-80fa-e335aa113b5f)
   
 # 참조
-- 일반계정: sejin/12341234
+- 일반계정: subin1234/12341234
 - 병원회원계정: daonhos/12341234
 - 관리자계정: jason/123
